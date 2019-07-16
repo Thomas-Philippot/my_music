@@ -1,0 +1,81 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="left">
+            <div class="nav-wrapper hide-on-med-and-down">
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <a href="{{ url('home') }}" class="brand-logo center">My Music</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li class="{{ app.request.get('_route') == 'music' ? 'active' }}">
+                    <a href="{{ url('music') }}">Music</a>
+                </li>
+                <li class="{{ app.request.get('_route') == 'video' ? 'active' }}">
+                    <a href="{{ url('video') }}">Vidéo</a>
+                </li>
+                <li class="{{ app.request.get('_route') == 'podcast' ? 'active' }}">
+                    <a href="{{ url('podcast') }}">Podcasts</a>
+                </li>
+                <li>
+                    <a class="disabled">
+                        {{ app.user.username }}
+                        <img src="{{ asset('avatar/')~app.user.avatar.link }}" alt="user-image" class="circle">
+                    </a>
+                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="{{ app.request.get('_route') == 'admin_zone' ? 'active' }}">
+                        <a href="{{ url('admin_zone') }}">Admin</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="{{ url('logout') }}">Déconnexion</a>
+                </li>
+            {% else %}
+                <li class="{{ app.request.get('_route') == 'register' ? 'active' }}">
+                    <a href="{{ url('register') }}">Inscription</a>
+                </li>
+                <li class="{{ app.request.get('_route') == 'login' ? 'active' }}">
+                    <a href="{{ path('login') }}">Connexion</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+
+<ul class="sidenav" id="mobile-demo">
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <li>
+            <a href="{{ url('music') }}">Music</a>
+        </li>
+        <li>
+            <a href="">Vidéo</a>
+        </li>
+        <li>
+            <a href="">Podcasts</a>
+        </li>
+    {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ url('admin_zone') }}">Admin</a>
+            </li>
+    {% endif %}
+        <li>
+            <a href="{{ url('logout') }}">Déconnexion</a>
+        </li>
+    {% else %}
+        <li>
+            <a href="{{ url('register') }}">Inscription</a>
+        </li>
+        <li>
+            <a href="{{ path('login') }}">Connexion</a>
+        </li>
+    {% endif %}
+</ul>

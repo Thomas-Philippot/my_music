@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+{% block container %}
+<div class="row">
+    {% for item in list %}
+    <div class="col s4">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('pochettes/')~item.cover }}">
+                        <span class="card-title">{{ item.name }}</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red" onclick="switchMedia(this, '{{ item.link }}')">
+                            <i class="material-icons left">play_arrow</i>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <p>{{ item.author }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    <a href="{{ url('home') }}" role="button" class="btn btn-primary mt-3">Retour</a>
+    <audio id="audio">
+        <source src="media/Blue_Skies.mp3" type="audio/mp3" id="source">
+        Your browser does not support the audio element.
+    </audio>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    function switchMedia(el, link) {
+        let buttons = document.getElementsByClassName('btn-floating');
+        for (let item of buttons) {
+            if (item !== el) {
+                item.innerHTML = '<i class="material-icons left">play_arrow</i>'
+            }
+        }
+        document.getElementById('source').setAttribute('src', 'media/' + link);
+        let yourAudio = document.getElementById('audio');
+        yourAudio.load();
+
+        // Update the Button
+        let pause = el.innerHTML === '<i class="material-icons left">pause</i>';
+        el.innerHTML = pause ? '<i class="material-icons left">play_arrow</i>' : '<i class="material-icons left">pause</i>';
+
+        // Update the Audio
+        let method = pause ? 'pause' : 'play';
+        yourAudio[method]();
+
+        // Prevent Default Action
+        return false;
+    }
+</script>
+{% endblock %}

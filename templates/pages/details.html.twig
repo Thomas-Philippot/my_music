@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+{% block container %}
+<div class="row">
+    <div class="col s12 center-align">
+        <video controls src="{{ asset('media/')~media.link }}">Ici la description alternative</video>
+    </div>
+    <a href="{{ url('video') }}" role="button" class="btn btn-primary mt-3">Retour</a>
+</div>
+{% endblock %}

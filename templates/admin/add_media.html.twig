@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+    <div class="row">
+        <div class="col s12">
+            <h1>Ajout d'un média</h1>
+            {{ form_start(form) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+
+            {{ form_label(form.author) }}
+            {{ form_widget(form.author) }}
+            {{ form_errors(form.author) }}
+
+            <div class = "row">
+                <label>{{ form_label(form.link) }}</label>
+                <div class = "file-field input-field">
+                    <div class="btn">
+                        <span>Browse</span>
+                        {{ form_widget(form.link) }}
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload multiple files (mp3, mp4)"/>
+                    </div>
+                    {{ form_errors(form.link) }}
+                </div>
+            </div>
+
+            {{ form_label(form.category) }}
+            {{ form_widget(form.category) }}
+            {{ form_errors(form.category) }}
+
+            <div class = "row">
+                <label>{{ form_label(form.cover) }}</label>
+                <div class = "file-field input-field">
+                    <div class="btn">
+                        <span>Browse</span>
+                        {{ form_widget(form.cover) }}
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload multiple files (jpg, png)"/>
+                    </div>
+                    {{ form_errors(form.cover) }}
+                </div>
+            </div>
+
+            <button type="submit" class="waves-effect waves-light btn">
+                <i class="material-icons right">check</i>Valider
+            </button>
+            <a href="{{ url('admin_zone') }}" class="waves-effect waves-light btn">Retour</a>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

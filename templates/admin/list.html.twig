@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+    <h1>Admin Zone</h1>
+    <div class="row">
+        <div class="col s6">
+            <h3>Gestion des médias</h3>
+            <ul class="collection">
+                {% for media in medias %}
+                    <li class="collection-item avatar">
+                        <img src="{{ asset('pochettes/')~media.cover }}" alt="user-icon" class="circle">
+                        <span class="title">{{ media.name }}</span>
+                        <p>{{ media.category.name }} <br>
+                        </p>
+                        <div class="secondary-content">
+                            <a href="{{ url('delete_media', { 'id': media.id } ) }}"><i class="material-icons color-red">delete</i></a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col s6">
+            <h3>Gestion des utilisateurs</h3>
+            <ul class="collection">
+                {% for user in users %}
+                    <li class="collection-item avatar">
+                        <img src="{{ asset('avatar/')~user.avatar.link }}" alt="user-icon" class="circle">
+                        <span class="title">{{ user.firstName }}</span>
+                        <p>{{ user.lastName }} <br>
+                            {{ user.username }}
+                        </p>
+                        <div class="secondary-content">
+                            <a href="{{ url('edit_user', { 'id': user.id } ) }}"><i class="material-icons">edit</i></a>
+                            <a href="{{ url('delete_user', { 'id': user.id } ) }}"><i class="material-icons color-red">delete</i></a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <a href="{{ url('add_media') }}" role="button" class="btn btn-primary mt-3"><i class="material-icons left">add</i>Ajouter un media</a>
+    <a href="{{ url('home') }}" role="button" class="btn btn-primary mt-3">Retour</a>
+{% endblock %}

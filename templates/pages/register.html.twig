@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+{% block container %}
+    <div class="row">
+        <div class="col s12">
+            <h1>{% trans %}Inscription{% endtrans %}</h1>
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username) }}
+                        <span  class="helper-text data-error">
+                            {{ form_errors(form.username) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        {{ form_label(form.password.first) }}
+                        {{ form_widget(form.password.first) }}
+                        <span  class="helper-text data-error">
+                            {{ form_errors(form.password.first) }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        {{ form_label(form.password.second) }}
+                        {{ form_widget(form.password.second) }}
+                        <span  class="helper-text data-error">
+                            {{ form_errors(form.password.second) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        {{ form_label(form.firstName) }}
+                        {{ form_widget(form.firstName) }}
+                        <span  class="helper-text data-error">
+                            {{ form_errors(form.firstName) }}
+                        </span>
+                    </div>
+                    <div class="input-field">
+                        {{ form_label(form.lastName) }}
+                        {{ form_widget(form.lastName) }}
+                        <span  class="helper-text data-error">
+                            {{ form_errors(form.lastName) }}
+                        </span>
+                    </div>
+                    <div class="input-field">
+                        <div class="row">
+                        {% for avatar in avatars %}
+                            {% set checked = (loop.index == 1) %}
+                            <div class="col s3">
+                                <label>
+                                    <input name="avatar" type="radio" value="{{ avatar.id }}" checked="{{ checked }}"/>
+                                    <img src="{{ asset('avatar/')~avatar.link}} " alt="avatar" class="avatar">
+                                </label>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success mt-3" >{% trans %}S'inscrire{% endtrans %}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

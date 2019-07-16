@@ -1,0 +1,38 @@
+label img {
+    width: 100px;
+    height: 100px;
+}
+
+a img {
+    position: relative;
+    top: 10px;
+    height: 35px;
+}
+
+img.grow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+img.regular {
+    box-shadow: none;
+}
+
+.left {
+    height: 100%;
+}
+
+.edit a, .edit button {
+    margin-top: 100px;
+}
+
+.color-red {
+    color: red;
+}
+
+.data-error {
+    color: red !important;
+}
+
+img.login {
+    height: 150px;
+}
